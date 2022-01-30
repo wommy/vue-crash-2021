@@ -3,15 +3,16 @@ defineProps({
   text: String,
   color: String,
 })
-function onClick() {
-	console.log('click') 
-} 
+defineEmits(['btn-click'])
+// function onClick() {
+// 	$emit('toggle-add-task')
+// } 
 </script>
 <template>
 	<button 
 		class="btn"
 		:style="{background: color}"
-		@click="onClick"
+		@click="$emit('btn-click')"
 	>{{ text }}</button>
 </template>
 <style>

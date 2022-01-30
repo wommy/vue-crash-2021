@@ -3,22 +3,31 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import Header from './components/Header.vue'
 import Tasks from './components/Tasks.vue'
+import AddTask from './components/AddTask.vue'
 </script>
 <script>
 export default {
   data(){
     return {
-      tasks: []
+      tasks: [],
+      showAddTask: false,
     }
   },
   methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
+    },
+    addTask(task){
+      this.tasks = [...this.tasks, task]
+    },
     deleteTask(id) {
       if(confirm('Are you sure?')) {
         this.tasks = this.tasks.filter(task => task.id !== id)
       }
     },
     toggleReminder(id) {
-      this.tasks = this.tasks.map( task => task.id === id ? { ...task, reminder: !task.reminder } : task )
+      this.tasks = this.tasks.map( task => task.id === id 
+        ? { ...task, reminder: !task.reminder } : task )
     }
   },
   created() {
@@ -48,7 +57,14 @@ export default {
 
 <template>
   <div class="container">
-    <Header title="Task Tracker" />
+    <Header 
+      title="Task Tracker" 
+      @toggle-add-task="toggleAddTask"
+      :showAddTask="showAddTask"
+    />
+    <div v-show="showAddTask">
+      <AddTask @add-task="addTask" />
+    </div>
     <Tasks 
       :tasks="tasks" 
       @delete-task="deleteTask"
