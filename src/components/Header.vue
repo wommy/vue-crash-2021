@@ -4,7 +4,7 @@ defineProps({
   title: String,
 	showAddTask: Boolean,
 })
-defineEmits(['btn-click'])
+defineEmits(['btn-click','toggle-add-task'])
 </script>
 <template>
 	<header>

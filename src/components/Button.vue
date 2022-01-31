@@ -4,9 +4,6 @@ defineProps({
   color: String,
 })
 defineEmits(['btn-click'])
-// function onClick() {
-// 	$emit('toggle-add-task')
-// } 
 </script>
 <template>
 	<button 
