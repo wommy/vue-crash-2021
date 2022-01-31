@@ -1,22 +1,14 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+import { ref } from 'vue'
+
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
-</script>
-<script>
-export default {
-  data(){
-    return {
-      showAddTask: false,
-    }
-  },
-  methods: {
-    toggleAddTask() {
-      this.showAddTask = !this.showAddTask
-    },
-  },
-}
+
+const showAddTask = ref(false)
+
+const toggleAddTask = ()=> showAddTask.value = !showAddTask.value
 </script>
 
 <template>
