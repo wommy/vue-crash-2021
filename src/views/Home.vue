@@ -70,9 +70,10 @@ export default {
 </script>
 
 <template>
-	<div v-show="showAddTask">
-		<AddTask @add-task="addTask" />
-	</div>
+  <AddTask 
+    v-show="showAddTask"
+    @add-task="addTask"
+  />
 	<Tasks 
 		:tasks="tasks" 
 		@delete-task="deleteTask"
