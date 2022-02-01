@@ -1,15 +1,12 @@
 <script setup>
+import { ref } from 'vue'
 defineEmits(['add-task'])
+const text = ref('')
+const day = ref('')
+const reminder = ref(false)
 </script>
 <script>
 export default {
-	data() {
-		return {
-			text: '',
-			day: '',
-			reminder: false
-		}
-	},
 	methods: {
 		onSubmit() {
 			if(!this.text) {
