@@ -18,7 +18,9 @@ const toggleAddTask = ()=> showAddTask.value = !showAddTask.value
       @toggle-add-task="toggleAddTask"
       :showAddTask="showAddTask"
     />
-    <router-view :showAddTask="showAddTask"></router-view>
+    <Suspense>
+      <router-view :showAddTask="showAddTask"></router-view>
+    </Suspense>
     <Footer />
   </div>
 </template>

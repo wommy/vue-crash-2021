@@ -3,18 +3,22 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import Tasks from '../components/Tasks.vue'
 import AddTask from '../components/AddTask.vue'
+import { ref } from 'vue'
 
 defineProps({
   showAddTask: Boolean,
 })
+const tasks = ref([])
+const fetchTasks = async ()=> {
+  const res = await fetch('api/tasks')
+  const data = await res.json()
+  return data
+}
+tasks.value = await fetchTasks()
+// console.log(tasks.value)
 </script>
 <script>
 export default {
-  data(){
-    return {
-      tasks: [],
-    }
-  },
   methods: {
     async addTask(task) {
       const res = await fetch('api/tasks', {
@@ -52,20 +56,12 @@ export default {
         task.id === id ? { ...task, reminder: data.reminder } : task
       )
     },
-    async fetchTasks() {
-      const res = await fetch('api/tasks')
-      const data = await res.json()
-      return data
-    },
     async fetchTask(id) {
       const res = await fetch(`api/tasks/${id}`)
       const data = await res.json()
       return data
     }
   },
-  async created() {
-    this.tasks = await this.fetchTasks()
-  }
 }
 </script>
 
@@ -74,11 +70,11 @@ export default {
     v-show="showAddTask"
     @add-task="addTask"
   />
-	<Tasks 
-		:tasks="tasks" 
-		@delete-task="deleteTask"
-		@toggle-reminder="toggleReminder"
-	/>
+  <Tasks 
+    :tasks="tasks" 
+    @delete-task="deleteTask"
+    @toggle-reminder="toggleReminder"
+  />
 </template>
 <style scoped>
 </style>
