@@ -1,31 +1,21 @@
 <script setup>
-import { ref } from 'vue'
-defineEmits(['add-task'])
+import { reactive, ref } from 'vue'
+const emit = defineEmits(['add-task'])
 const text = ref('')
 const day = ref('')
 const reminder = ref(false)
-</script>
-<script>
-export default {
-	methods: {
-		onSubmit() {
-			if(!this.text) {
-				alert('Please add a task')
-				return
-			}
-			const newTask = {
-				text: this.text,
-				day: this.day,
-				reminder: this.reminder
-			}
-			
-			this.$emit('add-task', newTask)
 
-			this.text = ''
-			this.day = ''
-			this.reminder = false
-		}
-	}
+const onSubmit = ()=> {
+  if(!text.value) {
+    alert('Please add a task')
+    return
+  }
+  
+  emit('add-task', reactive({ text, day, reminder }))
+
+  text.value = ''
+  day.value = ''
+  reminder.value = false
 }
 </script>
 <template>
